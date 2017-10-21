@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poof.Android", "Poof\Poof.Android\Poof.Android.csproj", "{E0D35AC7-CE22-430F-AF88-FB85777F05E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poof", "Poof\Poof\Poof.csproj", "{9C123CB2-E9A4-44CD-96A4-34B542DCB38B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poof", "Poof\Poof\Poof.csproj", "{9C123CB2-E9A4-44CD-96A4-34B542DCB38B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poof.UWP", "Poof\Poof.UWP\Poof.UWP.csproj", "{43328EB5-63E0-46EF-BCF7-E213489E6809}"
 EndProject
