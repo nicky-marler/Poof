@@ -11,6 +11,12 @@ namespace Poof
     {
         public App()
         {
+            decimal x = 7;
+            decimal y = 8;
+            decimal z = x / y;
+            z = Math.Round(z*100,1);
+            decimal a = z * 100;
+
             InitializeComponent();
 
             MainPage = new Poof.MainPage();
