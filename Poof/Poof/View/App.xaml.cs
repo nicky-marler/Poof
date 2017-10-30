@@ -18,6 +18,7 @@ namespace Poof
             decimal a = z * 100;
 
             InitializeComponent();
+            
 
             MainPage = new Poof.MainPage();
         }

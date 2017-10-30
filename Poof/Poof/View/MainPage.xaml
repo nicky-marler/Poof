@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:Poof"
              x:Class="Poof.MainPage">
 
-	<Label Text="Welcome to Xamarin Forms!" 
+        <Label Text="{Binding Test.Name}" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
-
+ 
 </ContentPage>

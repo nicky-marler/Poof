@@ -12,6 +12,7 @@ namespace Poof
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new ViewModel.Poof_ViewModel();
         }
     }
 }
