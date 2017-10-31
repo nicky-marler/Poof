@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MvvmHelpers;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Poof.Model
 {
-    class Category : ObservableObject
+    class Category : MVVM_Helper.Observable_Object
     {
         string name;
         int total_square_feet;

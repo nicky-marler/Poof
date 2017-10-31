@@ -1,17 +1,22 @@
-﻿using MvvmHelpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Xamarin.Forms;
 
 namespace Poof.ViewModel
 {
-    public class Poof_ViewModel : BaseViewModel
+    public class Poof_ViewModel : MVVM_Helper.Base_ViewModel
     {
-        public Model.Project Test { get; set; } = new Model.Project();
+        public Model.Test Testy { get; set; }
+        public Command Reset_Command { get; } 
 
         public Poof_ViewModel()
         {
-            Test = new Model.Project();
+        Reset_Command = new Command(Reset_Names);
+        Testy = new Model.Test();
+        }
+
+        void Reset_Names()
+        {
+            Testy.Name = "";
+            Testy.Other_Name = "";
         }
     }
 }

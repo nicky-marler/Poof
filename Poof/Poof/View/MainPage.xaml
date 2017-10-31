@@ -3,9 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Poof"
              x:Class="Poof.MainPage">
-
-        <Label Text="{Binding Test.Name}" 
+    <StackLayout>
+        <Entry Text="{Binding Testy.Name}"
+               Placeholder="Some person(or you)"/>
+        
+        <Entry Text="{Binding Testy.Other_Name}"
+               Placeholder="Another person"/>
+        
+        <Label Text="{Binding Testy.Statement}" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
- 
+
+        <Button Text="Reset" 
+                Command="{Binding Reset_Command}"/>
+    </StackLayout>
 </ContentPage>

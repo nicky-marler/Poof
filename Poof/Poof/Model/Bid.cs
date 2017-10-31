@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MvvmHelpers;
 
 namespace Poof.Model
 {
-    class Bid : ObservableObject
+    class Bid : MVVM_Helper.Observable_Object
     {
         string name;
         string phone;

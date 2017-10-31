@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MvvmHelpers;
+
 
 namespace Poof.Model 
 {
-    class Task : ObservableObject
+    public class Task : MVVM_Helper.Observable_Object
     {
         //Will liekly scrap the double crap
 
