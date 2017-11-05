@@ -28,7 +28,14 @@ namespace Poof.Abstract_Model
             get => finish; 
             set
             {
-                
+                if (value == true)
+                {
+                    Time_Elapsed = DateTime_Finish - DateTime_Start;
+                }
+                else
+                {
+                    Time_Elapsed = null;
+                }
                 SetProperty(ref finish, value);
             }
         }

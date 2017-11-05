@@ -35,7 +35,7 @@ namespace Poof.Model
         public double? Selected_Bid
         {
             get => selected_bid;
-            private set
+            set
             {
                 SetProperty(ref selected_bid, value);
             }
@@ -64,13 +64,23 @@ namespace Poof.Model
 
             return Math.Round(total / Bids.Count(),2);
         }
-
+        //View model stuff?
         public void Compute_Completion()
         {
             decimal Completed = Tasks.Count((Task task) => task.Finish == true);
             decimal Total = Tasks.Count;
             //To prevent dividing by 0
             Completion = Total == 0 ? Total : Math.Round(100 * (Completed / Total), 1);
+            //Check for higher up finsih
+            if (Completed / Total == 1)
+            {
+                //might need to be MAX()
+                DateTime_Finish = (from task in Tasks select task.DateTime_Finish).Min();
+                DateTime_Start = (from task in Tasks select task.DateTime_Start).Min();
+
+                //Set datetime to most recent task
+                Finish = true;
+            }
         }
 
     }

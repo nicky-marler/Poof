@@ -14,7 +14,7 @@ namespace Poof.Model
             Description = description;
         }
 
-
+        
 
     }
 }

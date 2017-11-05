@@ -23,7 +23,7 @@ namespace Poof.Model
         public int Living
         {
             get => living;
-            private set
+            set
             {
                 SetProperty(ref living, value);
             }
@@ -32,7 +32,7 @@ namespace Poof.Model
         public int Slab
         {
             get => slab;
-            private set
+             set
             {
                 SetProperty(ref slab, value);
             }
@@ -41,7 +41,7 @@ namespace Poof.Model
         public int Frame
         {
             get => frame;
-            private set
+            set
             {
                 SetProperty(ref frame, value);
             }
@@ -73,6 +73,16 @@ namespace Poof.Model
             decimal Total = (decimal)Categories.Count;
             //To prevent dividing by 0
             Completion = Total == 0 ? Total : Math.Round(100 * (Completed / Total), 1);
+
+            if (Completed / Total == 1)
+            {
+                //might need to be MAX()
+                DateTime_Finish = (from category in Categories select category.DateTime_Finish).Min();
+                DateTime_Start = (from category in Categories select category.DateTime_Start).Min();
+
+                //Set datetime to most recent task
+                Finish = true;
+            }
         }
 
         public void Get_Cost()    
