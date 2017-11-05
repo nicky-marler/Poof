@@ -2,19 +2,28 @@
 
 namespace Poof.Model
 {
-    class Bid : MVVM_Helper.Observable_Object
+    public class Bid : MVVM_Helper.Observable_Object
     {
         string name;
         string phone;
-        double price_psf;
-        double price_total;
+        decimal price;
         DateTime date_sent;
         DateTime date_received;
         bool selected;
 
+
+        public Bid()
+        {
+            name = "New Bid";
+            phone = "";
+            selected = false;
+
+
+        }
+
         public string Name
         {
-            get { return name; }
+            get => name;
             set
             {
                 SetProperty(ref name, value);
@@ -22,31 +31,24 @@ namespace Poof.Model
         }
         public string Phone
         {
-            get { return phone; }
+            get => phone; 
             set
             {
                 SetProperty(ref phone, value);
             }
         }
-        public double Price_PSF
+
+        public decimal Price
         {
-            get { return price_psf; }
+            get => price; 
             set
             {
-                SetProperty(ref price_psf, value);
-            }
-        }
-        public double Price_Total
-        {
-            get { return price_total; }
-            set
-            {
-                SetProperty(ref price_total, value);
+                SetProperty(ref price, value);
             }
         }
         public DateTime Date_Sent
         {
-            get { return date_sent; }
+            get => date_sent; 
             set
             {
                 SetProperty(ref date_sent, value);
@@ -54,7 +56,7 @@ namespace Poof.Model
         }
         public DateTime Date_Received
         {
-            get { return date_received; }
+            get => date_received; 
             set
             {
                 SetProperty(ref date_received, value);
@@ -71,18 +73,6 @@ namespace Poof.Model
         }
 
 
-        public Bid()
-        {
-            name = "New Bid";
-            phone = "";
-            //price_psf = 0;
-            //price_total = 0;
-            //date_sent = DateTime.Now;
-            //date_received = DateTime.Now;
-            selected = false;
-
-
-        }
 
 
 

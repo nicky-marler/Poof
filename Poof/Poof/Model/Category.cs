@@ -4,69 +4,73 @@ using System.Linq;
 
 namespace Poof.Model
 {
-    class Category : MVVM_Helper.Observable_Object
+    public class Category : Abstract_Model.Base_Poof
     {
-        string name;
-        int total_square_feet;
-        double average_bid_cost;
+      
+        double? average_bid;
+        double? selected_bid;
 
-        double? selected_cost;
-        decimal? completion_percentage;
+        decimal completion;
 
-        //DateTime(int Year, int Month, int Day)
-        DateTime datetime_start;
-        DateTime datetime_finish;
-
-        bool finish;
-
-        //This will need to be handeled by ViewModel
-        //public Bid Selected_Bid { get; set; }
-
-        public ObservableCollection<Bid> Bid_List { get; set; }
-        public ObservableCollection<Task> Task_List { get; set; }
-
-        public DateTime DateTime_Start
-        {
-            get { return datetime_start; }
-            set
-            {
-                SetProperty(ref datetime_start, value);
-            }
-        }
-        public DateTime DateTime_Finish
-        {
-            get { return datetime_finish; }
-            set
-            {
-                SetProperty(ref datetime_finish, value);
-            }
-        }
-
-
+        public ObservableCollection<Bid> Bids { get; set; }
+        public ObservableCollection<Task> Tasks { get; set; }
 
 
         public Category()
         {
-            Bid_List = new ObservableCollection<Bid>();
-            Task_List = new ObservableCollection<Task>();
+
+            Bids = new ObservableCollection<Bid>();
+            Tasks = new ObservableCollection<Task>();
         }
 
-        public void Percentage_Completed()
+        public double? Average_Bid
         {
-            //Can't divide by 0
-            if(Task_List.Count == 0)
+            get => average_bid;
+            private set
             {
-                completion_percentage = 0;
+                SetProperty(ref average_bid, value);
             }
-            else
+        }
+
+        public double? Selected_Bid
+        {
+            get => selected_bid;
+            private set
             {
-                //This gives the percent completion of the list.
-                //
-                //A lambda expression is used to count the finished tasks which is divided by its total
-                //The two counts are converted to decimal becuase of integer division does not give deciaml value
-                //The new decimal after division is then multiplied by 100 for a percent value and has the excess rounded off.
-                completion_percentage = Math.Round(100* ((decimal)Task_List.Count((Task task) => task.Finish = true) / (decimal)Task_List.Count),1);
+                SetProperty(ref selected_bid, value);
             }
+        }
+
+        public decimal Completion
+        {
+            get => completion;
+            private set
+            {
+                SetProperty(ref completion, value);
+            }
+        }
+
+        public decimal? Compute_Bid_Average()
+        {
+            if (Bids.Count == 0)
+            {
+                return 0;
+            }
+            decimal total = 0;
+            foreach (Bid bid in Bids)
+            {
+                total += bid.Price;
+            }
+
+            return Math.Round(total / Bids.Count(),2);
+        }
+
+        public void Compute_Completion()
+        {
+            decimal Completed = Tasks.Count((Task task) => task.Finish == true);
+            decimal Total = Tasks.Count;
+            //To prevent dividing by 0
+            Completion = Total == 0 ? Total : Math.Round(100 * (Completed / Total), 1);
         }
 
     }

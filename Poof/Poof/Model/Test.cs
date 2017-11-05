@@ -7,16 +7,6 @@
 
         public string Name
         {
-            get => other_name; 
-            set
-            {
-                SetProperty(ref other_name, value);
-                OnPropertyChanged(nameof(Statement));
-            }
-        }
-
-        public string Other_Name
-        {
             get => name; 
             set
             {
@@ -25,9 +15,24 @@
             }
         }
 
+        public string Other_Name
+        {
+            get => other_name; 
+            set
+            {
+                SetProperty(ref other_name, value);
+                OnPropertyChanged(nameof(Statement));
+            }
+        }
+
         public string Statement
         {
             get => $"{Name} and {Other_Name} are enemies"; 
+        }
+
+        public Test()
+        {
+
         }
     }
 }
