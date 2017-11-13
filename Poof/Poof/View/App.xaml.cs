@@ -4,24 +4,27 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace Poof
 {
     public partial class App : Application
     {
+
+        
+        public ViewModel.Poof_ViewModel Data { get; set; }
+
         public App()
         {
-            decimal x = 7;
-            decimal y = 8;
-            decimal z = x / y;
-            z = Math.Round(z*100,1);
-            decimal a = z * 100;
+            Data = new ViewModel.Poof_ViewModel();
 
             InitializeComponent();
             
 
-            MainPage = new Poof.MainPage();
+            MainPage = new NavigationPage( new MainPage());
         }
+
+        
 
         protected override void OnStart()
         {

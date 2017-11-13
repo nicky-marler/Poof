@@ -6,7 +6,7 @@ namespace Poof.Model
     {
         string name;
         string phone;
-        decimal price;
+        double price;
         DateTime date_sent;
         DateTime date_received;
         bool selected;
@@ -38,7 +38,7 @@ namespace Poof.Model
             }
         }
 
-        public decimal Price
+        public double Price
         {
             get => price; 
             set

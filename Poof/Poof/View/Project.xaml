@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Poof.View.Project_View"
+             Title="Project">
+    <ContentPage.Content>
+
+        <Grid RowSpacing="15" ColumnSpacing="0" Padding="10,15,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Entry Text="{Binding Selected_Project.Name}" Grid.Row="0" Grid.ColumnSpan="3"/>
+            <Label Text="{Binding Selected_Project.Completion_Statement}" Grid.Row="1" Grid.ColumnSpan="3"/>
+            <Label Text="{Binding Selected_Project.Total_Cost_Statement}" Grid.Row="2" Grid.ColumnSpan="3"/>
+            <StackLayout Grid.Row="3" Grid.Column="0" Spacing="0">
+                <Label Text="Frame:"/>
+                <Entry Text="{Binding Selected_Project.Frame}" Keyboard="Numeric"/>
+            </StackLayout>
+            <StackLayout Grid.Row="3" Grid.Column="1" Spacing="0">
+                <Label Text="Slab:"/>
+                <Entry Text="{Binding Selected_Project.Slab}" Keyboard="Numeric"/>
+            </StackLayout>
+            <StackLayout Grid.Row="3" Grid.Column="2" Spacing="0">
+                <Label Text="Living:"/>
+                <Entry Text="{Binding Selected_Project.Living}" Keyboard="Numeric"/>
+            </StackLayout>
+
+            <Button Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding Selected_Project.Category_Count_Statement}" Command="{Binding Open_CategoryList_Command}"/>
+
+            <Button Grid.Row="6" Grid.ColumnSpan="3" Text="Delete Project" Clicked="Delete_Project"/>
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

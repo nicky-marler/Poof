@@ -2,19 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Poof"
-             x:Class="Poof.MainPage">
-    <StackLayout>
-        <Entry Text="{Binding Testy.Name}"
-               Placeholder="Some person(or you)"/>
-        
-        <Entry Text="{Binding Testy.Other_Name}"
-               Placeholder="Another person"/>
-        
-        <Label Text="{Binding Testy.Statement}" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+             x:Class="Poof.MainPage"
+             Title="Project List">
 
-        <Button Text="Reset" 
-                Command="{Binding Reset_Command}"/>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="New_Button" Name="New" Command="{Binding New_Project_Command}" ></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout>
+        <ListView x:Name="Project_List"
+				ItemsSource="{Binding Projects}"
+		        ItemSelected="Open_Selected_Project"
+              HasUnevenRows="True"
+                  IsPullToRefreshEnabled="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15,10,15,10" Spacing="0">
+                            <Label Text="{Binding Name}"  FontSize="Medium" TextColor="Black"/>
+                            <Label Text="{Binding Completion_Statement}" FontSize="Small" TextColor="Gray"/>
+
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>

@@ -8,10 +8,9 @@ namespace Poof.Model
        public string Description { get; set; }
         
         //DateTime(int Year, int Month, int Day, int Hour, int Min, int Sec) will use this in the converter? Or cs file
-        public Task(string name, string description)
+        public Task()
         {
-            Name = name;
-            Description = description;
+
         }
 
         

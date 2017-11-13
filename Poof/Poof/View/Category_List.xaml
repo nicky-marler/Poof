@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Poof.View.Category_List">
+
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Name="New" Command="{Binding New_Category_Command}" ></ToolbarItem>
+        </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <ListView x:Name="The_Category_List"
+				ItemsSource="{Binding Selected_Project.Categories}"
+		        ItemSelected="Open_Selected_Category"
+              HasUnevenRows="True"
+                  IsPullToRefreshEnabled="False">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="15,10,15,10" Spacing="0">
+                                <Label Text="{Binding Name}"  FontSize="Medium" TextColor="Black"/>
+                                <Label Text="{Binding Completion_Statement}" FontSize="Small" TextColor="Gray"/>
+
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
