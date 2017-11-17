@@ -56,6 +56,7 @@ namespace Poof.ViewModel
             Selected_Project.Categories.Add(New_Category);
             Selected_Project.My_Count++;
             Selected_Category = New_Category;
+            Selected_Category.Get_Cost();
             await Page_Navigation.PushAsync(new View.Category());
         }
 

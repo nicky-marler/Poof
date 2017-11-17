@@ -19,7 +19,7 @@ namespace Poof.Model
 
         public Category()
         {
-
+            Name = "New Category";
             Bids = new List<Bid>();
             Tasks = new List<Task>();
         }
@@ -59,6 +59,18 @@ namespace Poof.Model
             get => $"{Completion.ToString()}% Completed";
         }
 
+        public string Seleced_Bid_Statement
+        {
+            get => $"Selected ${Selected_Bid.ToString()}";
+        }
+
+        public string Average_Cost_Statement
+        {
+            get => $"Average Bid ${Average_Bid.ToString()}";
+        }
+
+        
+
         public double? Compute_Bid_Average()
         {
             if (Bids?.Count == 0)
@@ -90,6 +102,25 @@ namespace Poof.Model
                 //Set datetime to most recent task
                 Finish = true;
             }
+        }
+
+        public void Get_Cost()
+        {
+            double total = 0;
+            double avg = 0;
+
+            if (Bids.Count > 0)
+            {
+                foreach (Bid bid in Bids)
+                {
+                    total += bid.Price;
+                }
+                avg = total / Bids.Count;
+            }
+            
+            Average_Bid = avg;
+
+            
         }
 
     }

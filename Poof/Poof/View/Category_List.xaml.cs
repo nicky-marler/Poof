@@ -26,6 +26,7 @@ namespace Poof.View
                 return;
             }
             ((App)Application.Current).Data.Selected_Category = (Model.Category)e.SelectedItem;
+            ((App)Application.Current).Data.Selected_Category.Get_Cost();
             await Navigation.PushAsync(new View.Category());
 
             The_Category_List.SelectedItem = null;

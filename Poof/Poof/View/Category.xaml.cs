@@ -15,6 +15,7 @@ namespace Poof.View
 		public Category ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = ((App)Application.Current).Data;
+        }
 	}
 }
