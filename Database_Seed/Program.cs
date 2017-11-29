@@ -1,109 +1,27 @@
-﻿using Xamarin.Forms;
-using System.Collections.ObjectModel;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.Net;
 using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Newtonsoft.Json;
 
-namespace Poof.ViewModel
+namespace Database_Seed
 {
-    public class Poof_ViewModel : MVVM_Helper.Base_ViewModel
+    class Program
     {
-        public INavigation Page_Navigation { get; set; }
+        private DocumentClient client;
 
-        public Model.Project Test_Seed { get; set; }
-        public ObservableCollection<Model.Project> Projects { get; set; } = new ObservableCollection<Model.Project>();
-
-        public Model.Project Selected_Project { get; set; }
-        public Model.Category Selected_Category { get; set; }
-        public Model.Task Selected_Task { get; set; }
-        public Model.Bid Selected_Bid { get; set; }
-
-        public Command New_Project_Command { get; }
-        public Command New_Category_Command { get; }
-        public Command Open_CategoryList_Command { get; }
-        public Command Fetch_Data_Command { get; }
-
-
-        public Poof_ViewModel()
+        static void Main(string[] args)
         {
-
-            //Test_Seed = Project_Seed();
-            //Test_Seed.Get_Completion();
-            //Test_Seed.Get_Cost();
-            //Projects.Add(Test_Seed);
-            
-
-
-            New_Project_Command = new Command(async () => await New_Project(), () => !IsBusy);
-            New_Category_Command = new Command(async () => await New_Category(), () => !IsBusy);
-            Open_CategoryList_Command = new Command(async () => await Open_CategoryList(), () => !IsBusy);
-            Fetch_Data_Command = new Command(async () => await Fetch_Data(), () => !IsBusy);
-
-           
-
-        }
-
-        public async Task New_Project()
-        {
-            Model.Project New_Project = new Model.Project();
-            New_Project.Categories = new ObservableCollection<Model.Category>();
-            New_Project.Get_Completion();
-            New_Project.Get_Cost();
-            Projects.Add(New_Project);
-            //Telling the page that it'a new Item
-            Selected_Project = New_Project;
-            await Page_Navigation.PushAsync(new View.Project_View());
-        }
-        public async Task New_Category()
-        {
-            Model.Category New_Category = new Model.Category();
-            New_Category.Bids = new List<Model.Bid>();
-            New_Category.Tasks = new List<Model.Task>();
-            Selected_Project.Categories.Add(New_Category);
-            Selected_Project.My_Count++;
-            Selected_Category = New_Category;
-            Selected_Category.Get_Cost();
-            await Page_Navigation.PushAsync(new View.Category());
-        }
-
-        public async Task Open_CategoryList()
-        {
-            await Page_Navigation.PushAsync(new View.Category_List());
-        }
-
-        public async Task Fetch_Data()
-        {
-            IsBusy = true;
-            Projects.Clear();
             try
             {
-                var Query = Azure.QueryManager.Set_Query();
-                while (Query.HasMoreResults)
-                {
-                    foreach (Model.Document DB_Document in await Query.ExecuteNextAsync<Model.Document>())
-                    {
-                        //Creates Business object to be added to the list
-                        Model.Project New_Project = new Model.Project
-                        {
-                            ID = DB_Document.Id,
-                            Name = DB_Document.Name,
-                            Frame = DB_Document.Frame,
-                            Living = DB_Document.Living,
-                            Slab = DB_Document.Slab,
-                            Categories = DB_Document.Categories
-
-                        };
-                        New_Project.Get_Completion();
-                        New_Project.Get_Cost();
-
-                        Projects.Add(New_Project);                           
-                 
-
-                    }
-                }
-                IsBusy = false;
-
+                Program p = new Program();
+                //p.GetStartedDemo().Wait();
+                p.SeedDB().Wait();
             }
             catch (DocumentClientException de)
             {
@@ -115,16 +33,52 @@ namespace Poof.ViewModel
                 Exception baseException = e.GetBaseException();
                 Console.WriteLine("Error: {0}, Message: {1}", e.Message, baseException.Message);
             }
+            finally
+            {
+                Console.WriteLine("End, press any key to exit.");
+                Console.ReadKey();
+
+            }
         }
 
-        //For local testing
-        private Model.Project Project_Seed() => new Model.Project
+        private void WriteToConsole(string format, params object[] args)
         {
-            Name = "Senior Capstone",
-            Frame = 100,
-            Living = 500,
-            Slab = 800,
-            Categories = new ObservableCollection<Model.Category>
+            Console.WriteLine(format, args);
+        }
+
+        private async Task CreateDocumentIfNotExists(string databaseName, string collectionName, Model.Project project_seed)
+        {
+            try
+            {
+                await this.client.ReadDocumentAsync(UriFactory.CreateDocumentUri(databaseName, collectionName, project_seed.Id) );
+                this.WriteToConsole("Found {0}", "Items");
+            }
+            catch (DocumentClientException de)
+            {
+                if (de.StatusCode == HttpStatusCode.NotFound)
+                {
+                    await this.client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName), project_seed);
+                    this.WriteToConsole("Created Item {0}", project_seed.Name);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private async Task SeedDB()
+        {
+            this.client = new DocumentClient(new Uri(Azure_Connection.EndpointUri), Azure_Connection.Key);
+
+            Model.Project Project_0 = new Model.Project
+            {
+                Id = "Projects",
+                Name = "Senior Capstone",
+                Frame = 100,
+                Living = 500,
+                Slab = 800,
+                Categories = new List<Model.Category>
             {
                 new Model.Category
                 {
@@ -247,6 +201,10 @@ namespace Poof.ViewModel
                     }
                 }
             }
-        };
+            };
+            await this.CreateDocumentIfNotExists(Azure_Connection.DB, Azure_Connection.Collection, Project_0);
+
+        }
+
     }
 }

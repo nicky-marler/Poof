@@ -22,6 +22,7 @@ namespace Poof
             
 
             MainPage = new NavigationPage( new MainPage());
+            Data.Fetch_Data();
         }
 
         

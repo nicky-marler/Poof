@@ -16,7 +16,7 @@ namespace Poof.Model
         int my_count;
 
 
-
+        public string ID { get; set; }
 
 
 
