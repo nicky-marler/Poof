@@ -10,24 +10,24 @@ using Xamarin.Forms.Xaml;
 namespace Poof.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Category : ContentPage
+	public partial class Task : ContentPage
 	{
-		public Category ()
+		public Task ()
 		{
 			InitializeComponent ();
             BindingContext = ((App)Application.Current).Data;
         }
 
-        public async void Delete_Category()
+        public async void Delete_Task()
         {
             var Answer = await DisplayAlert("Delete", "Are you sure?", "Yes", "No");
             if (Answer)
             {
                 await Navigation.PopAsync();
-                ((App)Application.Current).Data.Selected_Project.Categories.Remove(((App)Application.Current).Data.Selected_Category);
+                ((App)Application.Current).Data.Selected_Category.Tasks.Remove(((App)Application.Current).Data.Selected_Task);
                 ((App)Application.Current).Data.Selected_Project.Get_Completion();
-                ((App)Application.Current).Data.Selected_Project.Get_Cost();
-                ((App)Application.Current).Data.Selected_Project.My_Count--;
+                ((App)Application.Current).Data.Selected_Category.Get_Cost();
+                ((App)Application.Current).Data.Selected_Category.Task_Count--;
             }
         }
     }

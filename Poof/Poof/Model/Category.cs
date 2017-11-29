@@ -11,7 +11,8 @@ namespace Poof.Model
         double average_bid;
 
         double completion;
-
+        int bid_count;
+        int task_count;
 
         public List<Bid> Bids { get; set; }
         public List<Task> Tasks { get; set; }
@@ -69,7 +70,35 @@ namespace Poof.Model
             get => $"Average Bid ${Average_Bid.ToString()}";
         }
 
-        
+        public int Bid_Count
+        {
+            get => bid_count;
+            set
+            {
+                SetProperty(ref bid_count, value);
+                OnPropertyChanged(nameof(Bid_Count_Statement));
+            }
+        }
+
+        public string Bid_Count_Statement
+        {
+            get => $"Bids: {Bids.Count.ToString()}";
+        }
+
+        public int Task_Count
+        {
+            get => task_count;
+            set
+            {
+                SetProperty(ref task_count, value);
+                OnPropertyChanged(nameof(Task_Count_Statement));
+            }
+        }
+
+        public string Task_Count_Statement
+        {
+            get => $"Tasks: {Tasks.Count.ToString()}";
+        }
 
         public double? Compute_Bid_Average()
         {

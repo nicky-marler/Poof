@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Poof.View.Category_List"
-             Title="Categories">
+             x:Class="Poof.View.Task_List"
+             Title="Tasks">
 
-        <ContentPage.ToolbarItems>
-            <ToolbarItem Name="New" Command="{Binding New_Category_Command}" ></ToolbarItem>
-        </ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="New" Command="{Binding New_Task_Command}" ></ToolbarItem>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
 
         <StackLayout>
-            <ListView x:Name="The_Category_List"
-				ItemsSource="{Binding Selected_Project.Categories}"
+            <ListView x:Name="The_Task_List"
+				ItemsSource="{Binding Selected_Category.Tasks}"
 		        ItemSelected="Open_Selected_Category"
               HasUnevenRows="True"
                   IsPullToRefreshEnabled="False">

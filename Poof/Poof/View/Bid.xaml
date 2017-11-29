@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Poof.View.Category"
-             Title="Category">
+             x:Class="Poof.View.Bid">
     <ContentPage.Content>
-
         <Grid RowSpacing="15" ColumnSpacing="0" Padding="10,15,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -23,15 +21,15 @@
             </Grid.ColumnDefinitions>
 
 
-            <Entry Text="{Binding Selected_Category.Name}" Grid.Row="0" Grid.ColumnSpan="3"/>
-            <Label Text="{Binding Selected_Category.Completion_Statement}" Grid.Row="1" Grid.ColumnSpan="3"/>
-            <Label Text="{Binding Selected_Category.Seleced_Bid_Statement}" Grid.Row="2" Grid.ColumnSpan="3"/>
-            <Label Text="{Binding Selected_Category.Average_Cost_Statement}" Grid.Row="3" Grid.ColumnSpan="3"/>
+            <Entry Text="{Binding Selected_Bid.Name}" Grid.Row="0" Grid.ColumnSpan="3"/>
+            <Entry Text="{Binding Selected_Bid.Phone}" Grid.Row="1" Grid.ColumnSpan="3"/>
+            <Entry Text="{Binding Selected_Bid.Price}" Grid.Row="2" Grid.ColumnSpan="3"/>
 
-            <Button Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding Selected_Category.Task_Count_Statement}" Command="{Binding Open_TaskList_Command}"/>
-            <Button Grid.Row="5" Grid.ColumnSpan="3" Text="{Binding Selected_Category.Bid_Count_Statement}" Command="{Binding Open_BidList_Command}"/>
+            <Label Text="Selected" Grid.Row="3" Grid.Column="0" />
+            <Switch IsToggled="{Binding Selected_Bid.Selected}" Grid.Row="3" Grid.Column="1"/>
+           
 
-            <Button Grid.Row="7" Grid.ColumnSpan="3" Text="Delete Category" Clicked="Delete_Category"/>
+            <Button Grid.Row="7" Grid.ColumnSpan="3" Text="Delete Bid" Clicked="Delete_Bid"/>
 
 
         </Grid>

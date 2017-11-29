@@ -21,7 +21,11 @@ namespace Poof.ViewModel
 
         public Command New_Project_Command { get; }
         public Command New_Category_Command { get; }
+        public Command New_Task_Command { get; }
+        public Command New_Bid_Command { get; }
         public Command Open_CategoryList_Command { get; }
+        public Command Open_BidList_Command { get; }
+        public Command Open_TaskList_Command { get; }
         public Command Fetch_Data_Command { get; }
 
 
@@ -37,7 +41,11 @@ namespace Poof.ViewModel
 
             New_Project_Command = new Command(async () => await New_Project(), () => !IsBusy);
             New_Category_Command = new Command(async () => await New_Category(), () => !IsBusy);
+            New_Task_Command = new Command(async () => await New_Task(), () => !IsBusy);
+            New_Bid_Command = new Command(async () => await New_Bid(), () => !IsBusy);
             Open_CategoryList_Command = new Command(async () => await Open_CategoryList(), () => !IsBusy);
+            Open_BidList_Command = new Command(async () => await Open_BidList(), () => !IsBusy);
+            Open_TaskList_Command = new Command(async () => await Open_TaskList(), () => !IsBusy);
             Fetch_Data_Command = new Command(async () => await Fetch_Data(), () => !IsBusy);
 
            
@@ -66,10 +74,44 @@ namespace Poof.ViewModel
             Selected_Category.Get_Cost();
             await Page_Navigation.PushAsync(new View.Category());
         }
+        public async Task New_Task()
+        {
+            Model.Task New_Task = new Model.Task();
+            New_Task.Name = "New Task";
+            New_Task.Description = "";
+            New_Task.Finish = false;
+            Selected_Category.Tasks.Add(New_Task);
+            Selected_Category.Task_Count++;
+            Selected_Task = New_Task;
+            Selected_Category.Get_Cost();
+            await Page_Navigation.PushAsync(new View.Task());
+        }
+        public async Task New_Bid()
+        {
+            Model.Bid New_Bid = new Model.Bid();
+            New_Bid.Name = "New Bid";
+            New_Bid.Selected = false;
+            New_Bid.Price = 0.0;
+            Selected_Category.Bids.Add(New_Bid);
+            Selected_Category.Task_Count++;
+            Selected_Bid = New_Bid;
+            Selected_Category.Get_Cost();
+            await Page_Navigation.PushAsync(new View.Bid());
+        }
 
         public async Task Open_CategoryList()
         {
             await Page_Navigation.PushAsync(new View.Category_List());
+        }
+
+        public async Task Open_BidList()
+        {
+            await Page_Navigation.PushAsync(new View.Bid_List());
+        }
+
+        public async Task Open_TaskList()
+        {
+            await Page_Navigation.PushAsync(new View.Task_List());
         }
 
         public async Task Fetch_Data()
