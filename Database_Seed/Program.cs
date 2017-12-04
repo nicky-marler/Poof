@@ -73,8 +73,8 @@ namespace Database_Seed
 
             Model.Project Project_0 = new Model.Project
             {
-                Id = "Projects",
-                Name = "Senior Capstone",
+                Id = "Test",
+                Name = "Class Upload",
                 Frame = 100,
                 Living = 500,
                 Slab = 800,
@@ -110,7 +110,7 @@ namespace Database_Seed
                         {
                             Name = "Call Mom",
                             Description ="So she doesn't get mad",
-                            Finish = false
+                            Finish = true
                         }
                     }
                 },
@@ -144,7 +144,7 @@ namespace Database_Seed
                         {
                             Name = "Do something",
                             Description ="Lift something",
-                            Finish = false
+                            Finish = true
                         },
                         new Model.Task
                         {
@@ -190,7 +190,7 @@ namespace Database_Seed
                         {
                             Name = "Lay cement",
                             Description ="meh",
-                            Finish = false
+                            Finish = true
                         },
                         new Model.Task
                         {

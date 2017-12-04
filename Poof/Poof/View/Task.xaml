@@ -27,7 +27,7 @@
             <Entry Text="{Binding Selected_Task.Description}" Grid.Row="1" Grid.ColumnSpan="3"/>
 
             <Label Text="Selected" Grid.Row="2" Grid.Column="0" />
-            <Switch IsToggled="{Binding Selected_Task.Finish}" Grid.Row="2" Grid.Column="1"/>
+            <Switch IsToggled="{Binding Selected_Task.Finish}" Grid.Row="2" Grid.Column="1" Toggled="Update_Category"/>
 
 
             <Button Grid.Row="7" Grid.ColumnSpan="3" Text="Delete Task" Clicked="Delete_Task"/>

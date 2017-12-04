@@ -138,10 +138,7 @@ namespace Poof.ViewModel
                         };
                         New_Project.Get_Completion();
                         New_Project.Get_Cost();
-
-                        Projects.Add(New_Project);                           
-                 
-
+                        Projects.Add(New_Project);                                           
                     }
                 }
                 IsBusy = false;

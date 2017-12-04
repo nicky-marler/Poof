@@ -30,5 +30,11 @@ namespace Poof.View
                 ((App)Application.Current).Data.Selected_Category.Task_Count--;
             }
         }
+
+        public void Update_Category()
+        {
+            ((App)Application.Current).Data.Selected_Category.Compute_Completion();
+            ((App)Application.Current).Data.Selected_Project.Get_Completion();
+        }
     }
 }

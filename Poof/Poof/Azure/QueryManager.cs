@@ -1,9 +1,7 @@
 ﻿using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Poof.Azure
 {

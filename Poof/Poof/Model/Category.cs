@@ -52,6 +52,7 @@ namespace Poof.Model
             private set
             {
                 SetProperty(ref completion, value);
+                OnPropertyChanged(nameof(Completion_Statement));
             }
         }
 
